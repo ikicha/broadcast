@@ -16,6 +16,6 @@ app.get('/noti/:id', function (req, res) {
 
 io.on('connection', function (socket) {
     callback = (id) => {
-        socket.broadcast.emit('notification', { id });
+        socket.broadcast.emit('notification', { id, timestamp: Date.now()});
     }
 });
