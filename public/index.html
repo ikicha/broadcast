@@ -1,0 +1,21 @@
+<html>
+
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
+    <script>
+        var socket = io('localhost:8080');
+        socket.on('notification', function (data) {
+            var div = document.getElementById("messages");
+            div.innerHTML += '<p>' + JSON.stringify(data) +'</p>'
+            console.log(data);
+        });
+    </script>
+</head>
+
+<body>
+    <div id="messages">
+
+    </div>
+</body>
+
+</html>
