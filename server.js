@@ -2,15 +2,18 @@ var express = require('express');
 var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
-var callback = undefined;
+var sender = io.of('/send');
+var receiver = io.of('/receive');
+
 var port = process.env.PORT || 8080;
 server.listen(port);
+
 // WARNING: app.listen(80) will NOT work here!
 
-app.get('/noti/:id', function (req, res) {
-    var id = req.params.id;
-    io.sockets.emit('notification', { id, timestamp: Date.now()})
-    res.sendStatus(200);
+sender.on('connection', function(socket) {
+    socket.on('notification', function(data) {
+        receiver.emit('notification', data);
+    })
 });
 
 app.use('/', express.static('public'));

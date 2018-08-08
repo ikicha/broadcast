@@ -3,11 +3,10 @@
 <head>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
     <script>
-        var socket = io();
+        var socket = io('/receive');
         socket.on('notification', function (data) {
             var div = document.getElementById("messages");
-            div.innerHTML += '<p>' + JSON.stringify(data) +'</p>'
-            console.log(data);
+            div.innerHTML += '<p>' + JSON.stringify(data) + " " + (Date.now() - data.timestamp)+'</p>'
         });
     </script>
 </head>

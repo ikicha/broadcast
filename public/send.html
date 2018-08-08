@@ -1,0 +1,17 @@
+<html>
+
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
+    <script>
+        var socket = io('/send');
+        function send() {
+            socket.emit("notification", { id:123, timestamp: Date.now()});
+        }
+    </script>
+</head>
+
+<body>
+    <button onclick="send()">Send!</button>
+</body>
+
+</html>
