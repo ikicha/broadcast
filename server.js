@@ -16,4 +16,10 @@ sender.on('connection', function(socket) {
     })
 });
 
+app.get('/notification/:id', function(req, res) {
+    const id = req.params.id;
+    receiver.emit('notification', { id, timestamp: Date.now() });
+    res.sendStatus(200);
+});
+
 app.use('/', express.static('public'));
