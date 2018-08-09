@@ -20,17 +20,19 @@ sender.on('connection', function(socket) {
 
 app.post('/notification/:id', function(req, res) {
     const id = req.params.id;
-    const body = req.body;
-    if (!body) {
+    if (!req.body) {
         return;
     }
 
-    console.log(body);
-    if (body.data && body.eventType == "Microsoft.EventGrid.SubscriptionValidationEvent") {
-        const ValidationResponse = body.data.validationCode;
-        res.status(200).json({ValidationResponse})
-        console.log({ValidationResponse})
-        return;
+    console.log(req.body);
+    for (var i in req.body) {
+        const body = req.body[i];
+        if (body.data && body.eventType == "Microsoft.EventGrid.SubscriptionValidationEvent") {
+            const ValidationResponse = body.data.validationCode;
+            res.status(200).json({ValidationResponse})
+            console.log({ValidationResponse})
+            return;
+        }
     }
 
     receiver.emit('notification', { id, timestamp: Date.now() });
