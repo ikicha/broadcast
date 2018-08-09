@@ -26,14 +26,16 @@ app.post('/notification/:id', function(req, res) {
     }
 
     console.log(body);
-    if (body.data && body.eventType === "Microsoft.EventGrid.SubscriptionValidationEvent") {
+    if (body.data && body.eventType == "Microsoft.EventGrid.SubscriptionValidationEvent") {
         const ValidationResponse = body.data.validationCode;
         res.status(200).json({ValidationResponse})
+        console.log({ValidationResponse})
         return;
     }
 
     receiver.emit('notification', { id, timestamp: Date.now() });
     res.sendStatus(200);
+    console.log({id, timestamp: Date.now()});
 });
 
 app.use('/', express.static('public'));
