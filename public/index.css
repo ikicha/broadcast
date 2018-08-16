@@ -56,3 +56,10 @@
     opacity: 0;
     transition: opacity .5s ease;
 }
+.remocon-button:hover {
+    opacity: .3;
+    cursor: pointer;
+}
+.remocon-button:active {
+    opacity: .9;
+}
