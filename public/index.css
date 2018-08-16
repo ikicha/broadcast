@@ -1,9 +1,12 @@
 .tv-image {
-    width: 800px;
-    height: 600px;
+    width: 1122px;
+    height: 631px;
+}
+.image-container {
+    display: inline-block;
 }
 .remocon-container {
-    float: right;
+    display: inline-block;
     position: relative;
 }
 .remocon {
