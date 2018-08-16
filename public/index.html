@@ -11,9 +11,9 @@
             socket.on('notification', function(data) {
                 console.log(data);
                 if (data.id === "456") {
-                    invalidateImage("image2", "image2");
-                } else {
                     invalidateImage("image3", "image2");
+                } else {
+                    invalidateImage("image2", "image2");
                 }
             });
             function send(status) {
