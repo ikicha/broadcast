@@ -5,6 +5,7 @@ var io = require('socket.io')(server);
 var sender = io.of('/send');
 var receiver = io.of('/receive');
 var bodyParser = require('body-parser');
+const { remoteControl } = require('./iothubService');
 
 var port = process.env.PORT || 8080;
 server.listen(port);
@@ -38,6 +39,16 @@ app.post('/notification/:id', function(req, res) {
     receiver.emit('notification', { id, timestamp: Date.now() });
     res.sendStatus(200);
     console.log({id, timestamp: Date.now()});
+});
+
+app.post('/update', function (req, res) {
+    if (!req.body || req.body.status === undefined) {
+        res.sendStatus(400);
+        return;
+    }
+    remoteControl(req.body.status)
+        .then(result => res.status(200).json(result))
+        .catch(err => res.status(400).send(err));
 });
 
 app.use('/', express.static('public'));
