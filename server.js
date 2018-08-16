@@ -48,7 +48,7 @@ app.post('/update', function (req, res) {
     }
     remoteControl(req.body.status)
         .then(result => res.status(200).json(result))
-        .catch(err => res.status(400).send(err));
+        .catch(err => res.status(400).send("fail to remote control"));
 });
 
 app.use('/', express.static('public'));
